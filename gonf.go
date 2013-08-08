@@ -11,7 +11,6 @@ package gonf
 // I'm sure you can manage some proper error handling. :)
 import (
   "io/ioutil"
-  "regexp"
   "strings"
 )
 // Loads a configuration from a file into a map[string]string.
@@ -34,12 +33,10 @@ func GetGonf(fname string) (map[string]string, error) {
   lines := strings.Split(string(conf[:]), sep)
 
   // ### Analyse what we have for some config...
-  // This is a relatively naive process at the moment.
+  // This is a simple process at the moment.
   for _, v := range lines {
-    // Find the lines that start with valid characters and contain a value.
-    // It's only one value per line at the moment. :(
-    matched, _ := regexp.MatchString("^[a-z, A-Z, 0-9]+(=| = )+", strings.TrimSpace(v))
-    if matched && len(v) > 0 {
+    // ### Ignore commented lines
+    if len(v) > 0 && v[:1] != "#" {
       // Break out our respective values.
       // __TODO__ Fix this so we can comment inline.
       line := strings.Split(v, "=")
