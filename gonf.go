@@ -40,15 +40,28 @@ func GetGonf(fname, delim string) (map[string]string, error) {
     // ### Ignore commented lines
     if len(v) > 0 && v[:1] != "#" {
       // Break out our respective values.
-      // __TODO__ Fix this so we can comment inline.
-      line := strings.Split(v, "=")
+      line := retrieveKeyValuePair(v)
       // Trim our final values so we don't waste our time with gritty whitespace
       // That stuff gets in your teeth, it's horrible...
       config[strings.TrimSpace(line[0])] = strings.TrimSpace(line[1])
-      // A moose might also have bit my sister. She didn't whine about it on
-      // film though like some cry baby projectionist I know.
+      // A moose might also have bit my sister. Mind you, she didn't whine
+      // about it on film like some cry baby projectionist I know.
     }
   }
   // Oh yeah, actually give the values back.. Heh. That was close.
   return config, err
+}
+
+// Takes what is expected to be a key=value pair 'line' and
+// ignores the comments and returns the split pair for input
+// into our map
+func retrieveKeyValuePair(line string) []string {
+  // If our entry contains an inline comment
+  if strings.Contains(line, "#") {
+    // Change our line value to be the substring prior to the
+    // start of the comment
+    return strings.Split(line[:strings.Index(line, "#")], "=")
+  }
+  // If no comments were found then just hand it back.
+  return strings.Split(strings.TrimSpace(line), "=")
 }

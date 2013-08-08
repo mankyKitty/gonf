@@ -2,7 +2,7 @@ gonf
 ====
 Loads a configuration from a file into a map[string]string.
 
-Comments are supported, just use "#" at the start of the line. At this stage there is no inline commenting but that shouldn't be far off. :(
+Comments are supported, just use "#" at the start of the line. Inline comments are now supported as well! Woo!
 
 ## Installation
 

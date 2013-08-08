@@ -190,12 +190,11 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-12">&#182;</a>
               </div>
-                <p>Break out our respective values.
-<strong>TODO</strong> Fix this so we can comment inline.</p>
+                <p>Break out our respective values.</p>
 
             </td>
             <td class="code">
-                <div class="highlight"><pre>      <span class="nx">line</span> <span class="o">:=</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">v</span><span class="p">,</span> <span class="s">&quot;=&quot;</span><span class="p">)</span></pre></div>
+                <div class="highlight"><pre>      <span class="nx">line</span> <span class="o">:=</span> <span class="nx">retrieveKeyValuePair</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span></pre></div>
             </td>
           </tr>
           
@@ -218,8 +217,8 @@ That stuff gets in your teeth, it&rsquo;s horrible&hellip;</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-14">&#182;</a>
               </div>
-                <p>A moose might also have bit my sister. She didn&rsquo;t whine about it on
-film though like some cry baby projectionist I know.</p>
+                <p>A moose might also have bit my sister. Mind you, she didn&rsquo;t whine
+about it on film like some cry baby projectionist I know.</p>
 
             </td>
             <td class="code">
@@ -238,6 +237,63 @@ film though like some cry baby projectionist I know.</p>
             </td>
             <td class="code">
                 <div class="highlight"><pre>  <span class="k">return</span> <span class="nx">config</span><span class="p">,</span> <span class="nx">err</span>
+<span class="p">}</span></pre></div>
+            </td>
+          </tr>
+          
+          <tr id="section-16">
+            <td class="docs">
+              <div class="pilwrap">
+                  <a class="pilcrow" href="#section-16">&#182;</a>
+              </div>
+                <p>Takes what is expected to be a key=value pair &lsquo;line&rsquo; and
+ignores the comments and returns the split pair for input
+into our map</p>
+
+            </td>
+            <td class="code">
+                <div class="highlight"><pre><span class="kd">func</span> <span class="nx">retrieveKeyValuePair</span><span class="p">(</span><span class="nx">line</span> <span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">string</span> <span class="p">{</span></pre></div>
+            </td>
+          </tr>
+          
+          <tr id="section-17">
+            <td class="docs">
+              <div class="pilwrap">
+                  <a class="pilcrow" href="#section-17">&#182;</a>
+              </div>
+                <p>If our entry contains an inline comment</p>
+
+            </td>
+            <td class="code">
+                <div class="highlight"><pre>  <span class="k">if</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Contains</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="s">&quot;#&quot;</span><span class="p">)</span> <span class="p">{</span></pre></div>
+            </td>
+          </tr>
+          
+          <tr id="section-18">
+            <td class="docs">
+              <div class="pilwrap">
+                  <a class="pilcrow" href="#section-18">&#182;</a>
+              </div>
+                <p>Change our line value to be the substring prior to the
+start of the comment</p>
+
+            </td>
+            <td class="code">
+                <div class="highlight"><pre>    <span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">line</span><span class="p">[:</span><span class="nx">strings</span><span class="p">.</span><span class="nx">Index</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="s">&quot;#&quot;</span><span class="p">)],</span> <span class="s">&quot;=&quot;</span><span class="p">)</span>
+  <span class="p">}</span></pre></div>
+            </td>
+          </tr>
+          
+          <tr id="section-19">
+            <td class="docs">
+              <div class="pilwrap">
+                  <a class="pilcrow" href="#section-19">&#182;</a>
+              </div>
+                <p>If no comments were found then just hand it back.</p>
+
+            </td>
+            <td class="code">
+                <div class="highlight"><pre>  <span class="k">return</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">Split</span><span class="p">(</span><span class="nx">strings</span><span class="p">.</span><span class="nx">TrimSpace</span><span class="p">(</span><span class="nx">line</span><span class="p">),</span> <span class="s">&quot;=&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 
 </pre></div>
