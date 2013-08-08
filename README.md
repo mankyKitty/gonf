@@ -15,7 +15,7 @@ Comments are supported, just use "#" at the start of the line. Inline comments a
         )
 
         func main() {
-          conf, err := gonf.GetGonf("/path/to/file")
+          conf, err := gonf.GetGonf("/path/to/file", "\n")
         }
 
         $ [key:value, key:value ...etc]
