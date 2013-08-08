@@ -42,20 +42,31 @@
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-2">&#182;</a>
               </div>
-                <h1>Le Gonf</h1>
+                <p>Loads a configuration file into a <em>map[string]string</em> of
+configuration key=value pairs. Delimiter is provided by
+you. :)</p>
 
-<p>Loads a configuration from a file into a map[string]string.</p>
+<p>Get it from <a href="https://github.com/mankyKitty/gonf">here</a>.</p>
 
-<p>Get it from <a href="https://github.com/mankyKitty/gonf">here</a>.
-Or use <em>go get</em>
-       go get github.com/mankyKitty/gonf</p>
+<p>Or use <em>go get</em>!</p>
 
-<p>Import it
-       import &ldquo;github.com/mankyKitty/gonf&rdquo;</p>
+<p><code>
+       go get github.com/mankyKitty/gonf
+</code></p>
+
+<p>Import it</p>
+
+<p><code>
+       import &ldquo;github.com/mankyKitty/gonf&rdquo;
+</code></p>
 
 <p>Point it at your configuration file with your chosen method of
 delineation and marvel at the wonder of a neatly organised map
 of your configuration variables.</p>
+
+<p><code>
+       conf, err := gonf.GetGonf(&ldquo;/path/to/file&rdquo;, &ldquo;\n&rdquo;)
+</code></p>
 
 <p>Currently there is no support for loading the configuration values
 into their respective types, everything is a <em>string</em> at the moment.</p>
@@ -106,7 +117,8 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-                <h3><em>Be responsible and check for errors!</em></h3>
+                <p>Check we haven&rsquo;t had any io errors, escape immediately
+if anything is amiss.</p>
 
             </td>
             <td class="code">
@@ -123,6 +135,8 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               </div>
                 <h3>Avoid zero length config file.</h3>
 
+<p>Be kind to our users and tell them what has happened.</p>
+
             </td>
             <td class="code">
                 <div class="highlight"><pre>  <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">conf</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="p">{</span>
@@ -136,7 +150,7 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-                <h3>Create somewhere to keep out results</h3>
+                <p>Create somewhere to keep out results</p>
 
             </td>
             <td class="code">
@@ -149,7 +163,7 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-8">&#182;</a>
               </div>
-                <h3>Parse the file.</h3>
+                <p>Break out the file contents to parsing.</p>
 
             </td>
             <td class="code">
@@ -162,9 +176,9 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-9">&#182;</a>
               </div>
-                <h3>Analyse what we have for some config&hellip;</h3>
+                <h4>Analyse what we have for some config&hellip;</h4>
 
-<p>This is a simple process at the moment.</p>
+<p>KISS principle is in full effect.</p>
 
             </td>
             <td class="code">
@@ -177,7 +191,7 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-10">&#182;</a>
               </div>
-                <h3>Ignore commented lines</h3>
+                <p>Ensure we ignore commented lines.</p>
 
             </td>
             <td class="code">
