@@ -69,7 +69,6 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
             <td class="code">
                 <div class="highlight"><pre><span class="kn">import</span> <span class="p">(</span>
   <span class="s">&quot;io/ioutil&quot;</span>
-  <span class="s">&quot;regexp&quot;</span>
   <span class="s">&quot;strings&quot;</span>
 <span class="p">)</span></pre></div>
             </td>
@@ -80,11 +79,7 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-                <h3>Parameters</h3>
-
-<ul>
-<li>fname <em>string</em> - the file name with absolute path to the config file in question</li>
-</ul>
+                <p>Loads a configuration from a file into a map[string]string.</p>
 
             </td>
             <td class="code">
@@ -166,7 +161,7 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               </div>
                 <h3>Analyse what we have for some config&hellip;</h3>
 
-<p>This is a relatively naive process at the moment.</p>
+<p>This is a simple process at the moment.</p>
 
             </td>
             <td class="code">
@@ -179,13 +174,11 @@ I&rsquo;m sure you can manage some proper error handling. :)</p>
               <div class="pilwrap">
                   <a class="pilcrow" href="#section-11">&#182;</a>
               </div>
-                <p>Find the lines that start with valid characters and contain a value.
-It&rsquo;s only one value per line at the moment. :(</p>
+                <h3>Ignore commented lines</h3>
 
             </td>
             <td class="code">
-                <div class="highlight"><pre>    <span class="nx">matched</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">regexp</span><span class="p">.</span><span class="nx">MatchString</span><span class="p">(</span><span class="s">&quot;^[a-z, A-Z, 0-9]+(=| = )+&quot;</span><span class="p">,</span> <span class="nx">strings</span><span class="p">.</span><span class="nx">TrimSpace</span><span class="p">(</span><span class="nx">v</span><span class="p">))</span>
-    <span class="k">if</span> <span class="nx">matched</span> <span class="o">&amp;&amp;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span></pre></div>
+                <div class="highlight"><pre>    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nx">v</span><span class="p">)</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">v</span><span class="p">[:</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="s">&quot;#&quot;</span> <span class="p">{</span></pre></div>
             </td>
           </tr>
           
