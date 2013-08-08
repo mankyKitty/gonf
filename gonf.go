@@ -1,18 +1,29 @@
 package gonf
-// # Le Gonf
-//
-// Loads a configuration from a file into a map[string]string.
+// Loads a configuration file into a _map[string]string_ of
+// configuration key=value pairs. Delimiter is provided by
+// you. :)
 //
 // Get it from [here](https://github.com/mankyKitty/gonf).
-// Or use _go get_
+//
+// Or use _go get_!
+//
+// <code>
 //        go get github.com/mankyKitty/gonf
+// </code>
 //
 // Import it
+//
+// <code>
 //        import "github.com/mankyKitty/gonf"
+// </code>
 //
 // Point it at your configuration file with your chosen method of
 // delineation and marvel at the wonder of a neatly organised map
 // of your configuration variables.
+//
+// <code>
+//        conf, err := gonf.GetGonf("/path/to/file", "\n")
+// </code>
 //
 // Currently there is no support for loading the configuration values
 // into their respective types, everything is a _string_ at the moment.
@@ -31,25 +42,27 @@ func GetGonf(fname, delim string) (map[string]string, error) {
   // Get the file.
   conf, err := ioutil.ReadFile(fname)
 
-  // ### _Be responsible and check for errors!_
+  // Check we haven't had any io errors, escape immediately
+  // if anything is amiss.
   if err != nil {
     return nil, err
   }
   // ### Avoid zero length config file.
+  // Be kind to our users and tell them what has happened.
   if len(conf) <= 0 {
     return nil, errors.New("Zero length configuration file!")
   }
 
-  // ### Create somewhere to keep out results
+  // Create somewhere to keep out results
   config := make(map[string]string)
 
-  // ### Parse the file.
+  // Break out the file contents to parsing.
   lines := strings.Split(string(conf[:]), delim)
 
-  // ### Analyse what we have for some config...
-  // This is a simple process at the moment.
+  // #### Analyse what we have for some config...
+  // KISS principle is in full effect.
   for _, v := range lines {
-    // ### Ignore commented lines
+    // Ensure we ignore commented lines.
     if len(v) > 0 && v[:1] != "#" {
       // Break out our respective values.
       line := retrieveKeyValuePair(v)
