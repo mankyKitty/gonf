@@ -10,14 +10,12 @@ package gonf
 // that seemed excessive for this iddy biddy package. You're a big coder,
 // I'm sure you can manage some proper error handling. :)
 import (
+  "errors"
   "io/ioutil"
   "strings"
 )
 // Loads a configuration from a file into a map[string]string.
-func GetGonf(fname string) (map[string]string, error) {
-  // Default separator for now...
-  sep := "\n"
-
+func GetGonf(fname, delim string) (map[string]string, error) {
   // Get the file.
   conf, err := ioutil.ReadFile(fname)
 
@@ -25,12 +23,16 @@ func GetGonf(fname string) (map[string]string, error) {
   if err != nil {
     return nil, err
   }
+  // ### Avoid zero length config file.
+  if len(conf) <= 0 {
+    return nil, errors.New("Zero length configuration file!")
+  }
 
   // ### Create somewhere to keep out results
   config := make(map[string]string)
 
   // ### Parse the file.
-  lines := strings.Split(string(conf[:]), sep)
+  lines := strings.Split(string(conf[:]), delim)
 
   // ### Analyse what we have for some config...
   // This is a simple process at the moment.
