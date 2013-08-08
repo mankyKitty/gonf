@@ -1,9 +1,21 @@
 package gonf
-// # Gonf!!!
+// # Le Gonf
+//
 // Loads a configuration from a file into a map[string]string.
-
-// Currently no support for loading the configuration options into
-// their respective types, but that should all come in good time.
+//
+// Get it from [here](https://github.com/mankyKitty/gonf).
+// Or use _go get_
+//        go get github.com/mankyKitty/gonf
+//
+// Import it
+//        import "github.com/mankyKitty/gonf"
+//
+// Point it at your configuration file with your chosen method of
+// delineation and marvel at the wonder of a neatly organised map
+// of your configuration variables.
+//
+// Currently there is no support for loading the configuration values
+// into their respective types, everything is a _string_ at the moment.
 //
 // Original consideration was to let you specify if you wanted Gonf to
 // panic, print, or fatal if the file could not be read/loaded etc but
