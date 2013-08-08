@@ -14,8 +14,7 @@ import (
   "regexp"
   "strings"
 )
-// ### Parameters
-// - fname _string_ - the file name with absolute path to the config file in question
+// Loads a configuration from a file into a map[string]string.
 func GetGonf(fname string) (map[string]string, error) {
   // Default separator for now...
   sep := "\n"
